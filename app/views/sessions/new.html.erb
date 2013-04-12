@@ -1,0 +1,8 @@
+<h1>Přihlašte se, prosím</h1>
+<div ng-controller='SessionsController'>
+<form ng-submit='createSession()'>
+  <input type="text" name="login_username" ng-model='session.login_username' >
+  <input type="password" name="password" ng-model='session.password' >
+  <input type='submit' value='Prihlasit se'/>
+</form>
+</div>
