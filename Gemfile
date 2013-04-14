@@ -26,6 +26,7 @@ group :test do
   gem 'launchy'
   gem 'shoulda-matchers'
   gem "factory_girl_rails"
+  gem "selenium-webdriver"
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
 end

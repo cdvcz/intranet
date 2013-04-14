@@ -4,7 +4,7 @@
   $scope.createSession = ->
     Session.save $scope.session, (result) ->
       if result.authorized == 'true'
-        alert("ANO: " + result.content.user.last_name)
+        $scope.result = "Byl jste přihlášen"
       else
-        alert("NE!")
+        $scope.result = "Nesprávné uživatelské jméno nebo heslo"
 
