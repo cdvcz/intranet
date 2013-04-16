@@ -4,17 +4,17 @@ factory 'SessionService', ($resource) ->
 
   current_user = {authorized: false}
 
-  login = (session, result_handler) ->
-    Session.save session, (result) ->
-      if result.authorized
-        current_user = result.content.user
+  login = (session, response_handler) ->
+    Session.save session, (response) ->
+      if response.authorized
+        current_user = response.content.user
       else
         current_user = {}
 
-      current_user.authorized = result.authorized
+      current_user.authorized = response.authorized
 
-      if angular.isFunction result_handler
-        result_handler(result.authorized, current_user)
+      if angular.isFunction response_handler
+        response_handler(response.authorized, current_user)
 
   authorized = ->
     current_user.authorized
