@@ -1,4 +1,4 @@
-@SessionsController = ["$scope", "$resource", "SessionService", ($scope, $resource, SessionService) ->
+@SessionsController = ["$scope", "$location", "$resource", "SessionService", ($scope, $location, $resource, SessionService) ->
 
   $scope.user = SessionService.currentUser()
 
@@ -6,9 +6,13 @@
     SessionService.login $scope.session, (authorized, user) ->
       if authorized
         $scope.result = "Byl jste přihlášen jako #{user.login_username}"
-        $scope.username = SessionService.currentUser().login_username
+        $location.path "/"
       else
         $scope.result = "Nesprávné uživatelské jméno nebo heslo"
+
+  $scope.logout = ->
+    SessionService.logout()
+    $location.path "/login"
 
   init = ->
     if SessionService.authorized()
@@ -19,3 +23,4 @@
 
   init()
 ]
+

@@ -8,7 +8,8 @@ Feature: Autentizace uzivatelu
     When I go to "the homepage"
     And I fill valid username and password
     And I press "Přihlásit se"
-    Then I should see "Byl jste přihlášen"
+    Then I should see "Tajna stranka"
+    Then I should see "Odhlasit"
 
   Scenario: Uzivatel nemuze prihlasit se spatnym heslem
     Given An closed user exists
