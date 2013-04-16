@@ -1,5 +1,6 @@
 <h1>Přihlašte se, prosím</h1>
 <div ng-controller='SessionsController'>
+{{ username }}
 <form ng-submit='createSession()'>
   <label for='login_username'>Uživatel</label>
   <input type="text" id='login_username' name="login_username" ng-model='session.login_username' >

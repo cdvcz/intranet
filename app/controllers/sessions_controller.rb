@@ -7,14 +7,14 @@ class SessionsController < ApplicationController
     user = User.find_by_login_username(params[:login_username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      render json: { content: user, authorized: 'true' }
+      render json: { content: user, authorized: true }
     else
-      render json: { authorized: 'false' }
+      render json: { authorized: false }
     end
   end
 
   def destroy
     session[:user_id] = nil
-    render json: { authorized: 'false' }
+    render json: { authorized: false }
   end
 end

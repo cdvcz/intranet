@@ -35,10 +35,10 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: intranet_production
+  database: intranet_development
   pool: 5
   username: root
-  password:
+  password: gonsan2u
   host: localhost
 
 cucumber:

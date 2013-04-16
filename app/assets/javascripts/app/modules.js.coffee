@@ -1,1 +1,1 @@
-angular.module("Intranet", ["ngResource"])
+$app = angular.module("Intranet", ["ngResource", 'Intranet.services'])

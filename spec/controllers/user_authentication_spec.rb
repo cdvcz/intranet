@@ -9,7 +9,7 @@ describe SessionsController do
 
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)
-    body["authorized"].should == 'true'
+    body["authorized"].should be_true
     body["content"]["user"]["login_username"].should == 'test'
   end
 
@@ -20,7 +20,7 @@ describe SessionsController do
 
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)
-    body["authorized"].should == 'false'
+    body["authorized"].should be_false
     body["content"].should be_nil
   end
 
