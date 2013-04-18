@@ -1,5 +1,3 @@
-services = angular.module("Intranet.services", ["ngResource"])
-
 services.factory 'SessionService', ($resource) ->
   Session = $resource("/sessions/:id", {id: "@id"})
 
