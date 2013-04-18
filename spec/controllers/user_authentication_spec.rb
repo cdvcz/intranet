@@ -5,7 +5,7 @@ describe SessionsController do
   it "Uzivatel se spravnym heslem se prihlasi" do
     User.create!(password: "heslo", login_username: "test")
 
-    post :create, login_username: 'test', password: 'heslo'
+    post :create, login_username: 'test', login_password: 'heslo'
 
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)

@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_login_username(params[:login_username])
-    if user && user.authenticate(params[:password])
+    if user && user.authenticate(params[:login_password])
       session[:user_id] = user.id
       render json: { content: user, authorized: true }
     else
