@@ -1,0 +1,13 @@
+angular.module('Intranet').config ['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
+
+  $routeProvider
+  .when '/',
+      templateUrl: '<%= asset_path("home/index.html") %>',
+      controller: 'HomeController'
+  .when '/login',
+      templateUrl: '<%= asset_path("sessions/login.html") %>',
+      controller: 'SessionsController'
+
+  # enabling html5Mode
+  $locationProvider.html5Mode true
+]
