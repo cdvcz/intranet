@@ -1,4 +1,4 @@
-angular.module('Intranet').config ['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
+intranet.config ($routeProvider, $locationProvider) ->
 
   $routeProvider
   .when '/',
@@ -8,6 +8,5 @@ angular.module('Intranet').config ['$routeProvider', '$locationProvider', ($rout
       templateUrl: '<%= asset_path("sessions/login.html") %>',
       controller: 'SessionsController'
 
-  # enabling html5Mode
   $locationProvider.html5Mode true
-]
+
