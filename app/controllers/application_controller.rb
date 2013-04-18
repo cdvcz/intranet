@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::Base
-  before_filter :ensure_authenticated
+  before_filter :ensure_authenticated, except: [ :start ]
+
+  def start
+    render layout: "application", text: ""
+  end
 
   private
 
