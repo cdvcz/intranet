@@ -3,4 +3,5 @@ Intranet::Application.routes.draw do
   resources :sessions
 
   root :to => "sessions#new"
+  match "*path", to: 'sessions#new'
 end
