@@ -1,4 +1,6 @@
 Intranet::Application.routes.draw do
+  resources :employees
+
   resources :users, except: [:edit, :new]
   resources :sessions
 

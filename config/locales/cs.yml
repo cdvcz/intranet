@@ -1,0 +1,5 @@
+cs:
+  activerecord:
+    errors:
+      messages:
+        blank: Toto pole nemůže zůstat prázdné

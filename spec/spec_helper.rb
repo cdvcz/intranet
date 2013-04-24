@@ -17,6 +17,8 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
 
+  config.render_views = true
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -36,3 +38,11 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+def setup_user(role="", format=nil)
+  @user = FactoryGirl.create(:user)
+  #@user.roles = [role]
+  #@ability = Ability.new(@user, format)
+  session[:user_id] = @user.id
+end
+
