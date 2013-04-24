@@ -18,7 +18,7 @@ When(/^I fill valid username and password$/) do
 end
 
 When(/^I fill invalid username and password$/) do
-  fill_in 'Uživatel', with: @user.email
+  fill_in 'Uživatel', with: @user.login_username
   fill_in 'Heslo', with: "spatneheslo"
 end
 
