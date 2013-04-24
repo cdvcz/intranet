@@ -74,10 +74,10 @@ describe EmployeesController do
   end
 
   it "neupravi zamestnance bez prijmeni" do
-    post :create,
+    post :update,
       format: :json,
       id: @employee_1.id,
-      employee: EMPLOYEE_ATTRIBUTES.merge(:surname => "")
+      employee: { surname: "" }
 
     response.status.should == 422
     body = ActiveSupport::JSON.decode(response.body)
