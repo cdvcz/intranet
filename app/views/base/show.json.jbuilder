@@ -1,0 +1,1 @@
+json.content resource.attributes

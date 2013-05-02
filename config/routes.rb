@@ -1,10 +1,7 @@
 Intranet::Application.routes.draw do
+  resources :roles
   resources :projects
-
-
   resources :subjects
-
-
   resources :employees
 
   resources :users, except: [:edit, :new]
