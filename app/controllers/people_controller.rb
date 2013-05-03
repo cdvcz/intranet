@@ -1,0 +1,2 @@
+class PeopleController < BaseController
+end
