@@ -1,6 +1,12 @@
 FactoryGirl.define do
   factory :user do
-    login "admin"
+    login "hus"
     password "abc123"
+
+    name "Jan Hus"
+
+    factory :disabled_user do
+      login_allowed false
+    end
   end
 end

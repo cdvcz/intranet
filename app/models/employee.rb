@@ -1,10 +1,12 @@
 class Employee < ActiveRecord::Base
-  attr_protected :created_at
+  belongs_to :person
+  has_and_belongs_to_many :users
 
-  validates :surname, presence: true
+  attr_protected :created_at, :updated_at
+
+  validates :person_id, presence: true
 
   def full_name_with_titles
-    [ title_prefix, first_name, surname, title_suffix ].
-      reject{|attr| attr.blank?}.join(" ")
+    #[ title_prefix, first_name, surname, title_suffix ].reject{|attr| attr.blank?}.join(" ")
   end
 end

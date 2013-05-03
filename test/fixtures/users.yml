@@ -3,13 +3,9 @@
 one:
   login: MyString
   password: MyString
-  first_name: MyString
-  last_name: MyString
-  email: MyString
+  name: MyString
 
 two:
   login: MyString
   password: MyString
-  first_name: MyString
-  last_name: MyString
-  email: MyString
+  name: MyString

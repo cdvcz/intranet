@@ -5,7 +5,7 @@ class EmployeesController < BaseController
 
   def set_default_sort
     params[:search] ||= {}
-    params[:search][:meta_sort] ||= 'surname.asc'
+    params[:search][:meta_sort] ||= 'id.asc'
   end
 end
 
