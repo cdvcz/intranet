@@ -4,8 +4,9 @@ Intranet::Application.routes.draw do
   resources :projects
   resources :subjects
   resources :employees
+  resources :people
+
   resources :users, except: [:edit, :new]
-  resources :sessions
 
   root to: 'application#start'
   match "*path", to: 'application#start'

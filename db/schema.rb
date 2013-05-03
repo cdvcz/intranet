@@ -50,6 +50,18 @@ ActiveRecord::Schema.define(:version => 20130507123712) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "people", :force => true do |t|
+    t.integer  "status"
+    t.string   "first_name"
+    t.string   "second_name"
+    t.string   "last_name"
+    t.string   "title_prefix"
+    t.string   "title_suffix"
+    t.integer  "sex"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "projects", :force => true do |t|
     t.integer  "status"
     t.string   "number"
