@@ -42,7 +42,7 @@ describe UnitsController do
     %w{id name abbreviation}.each do |attribute|
       body["content"][attribute].should == @field11.send(attribute.to_sym)
     end
-    body["content"]["parent_id"].should == @divize1.id
+    body["content"]["parent_id"].should == @field11.parent_id
   end
 
   ## CREATE ##################################################################
