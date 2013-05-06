@@ -55,7 +55,8 @@ describe UnitsController do
   end
 
   it "vytvoreni oblasti" do
-    post :create, format: :json, unit: FIELD_ATTRIBUTES
+    unit = { "name" => "Oblast 22", "abbreviation" => "O22", "parent_id" => @division2.id }
+    post :create, format: :json, unit: unit
 
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)
