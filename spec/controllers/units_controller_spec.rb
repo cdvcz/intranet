@@ -24,12 +24,12 @@ describe UnitsController do
 
   ## SHOW ####################################################################
   it "detail divize 1" do
-    get :show, id: @divize1.id, format: :json
+    get :show, id: @division1.id, format: :json
 
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)
     %w{id name abbreviation}.each do |attribute|
-      body["content"][attribute].should == @divize1.send(attribute.to_sym)
+      body["content"][attribute].should == @division1.send(attribute.to_sym)
     end
     body["content"]["parent_id"].should == nil
   end
