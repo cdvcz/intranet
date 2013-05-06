@@ -1,2 +1,2 @@
-class UnitsController < ApplicationController
+class UnitsController < BaseController
 end
