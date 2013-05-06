@@ -5,7 +5,7 @@ require 'spec_helper'
 describe EmployeesController do
 
   before do
-    setup_user(:user)
+    setup_user(:admin)
     @employee_1 = FactoryGirl.create(:employee, surname: "Novák")
     @employee_2 = FactoryGirl.create(:employee, surname: "Bartoš")
   end

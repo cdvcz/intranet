@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe SubjectsController do
   before do
-    setup_user(:user)
+    setup_user(:admin)
     @subject_1 = FactoryGirl.create(:subject, name: "Google")
     @subject_2 = FactoryGirl.create(:subject, name: "Apple")
   end

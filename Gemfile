@@ -7,6 +7,7 @@ gem 'inherited_resources'
 gem 'jbuilder'
 gem 'meta_search'
 gem 'will_paginate'
+gem 'cancan'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

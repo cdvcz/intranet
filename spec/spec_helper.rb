@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require "cancan/matchers"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -39,10 +40,10 @@ RSpec.configure do |config|
   config.order = "random"
 end
 
-def setup_user(role="", format=nil)
+def setup_user(role = "", ability_class = Ability)
   @user = FactoryGirl.create(:user)
-  #@user.roles = [role]
-  #@ability = Ability.new(@user, format)
+  @role = FactoryGirl.create(:role, code: role.to_s)
+  @user.roles << @role
+  @ability = ability_class.new(@user)
   session[:user_id] = @user.id
 end
-

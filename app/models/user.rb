@@ -8,4 +8,9 @@ class User < ActiveRecord::Base
 
   validates :login_username, presence: true
   validates :password, presence: true, on: :create
+
+
+  def has_role?(role_code)
+    roles.find_by_code(role_code.to_s) != nil
+  end
 end

@@ -4,84 +4,100 @@ require 'spec_helper'
 
 describe RolesController do
 
-  before do
-    setup_user(:user)
-    @role_1 = FactoryGirl.create(:role, code: 'user_role')
-    @role_2 = FactoryGirl.create(:admin_role, code: 'admin_role')
+  # Kontrola, zda je zapnuta kontrola prav - ostatni ability se kontroluji v roles_ability_spec.rb
+  context "Uzivatel s roli 'user'" do
+    it "nema pristup do roli" do
+      setup_user(:user)
+
+      get :index, format: :json
+
+      response.status.should == 403
+    end
   end
 
-  ## INDEX ####################################################################
-  it "vrati seznam roli" do
-    get :index, format: :json
+  context "Uzivatel s roli 'administrator'" do
+    before do
+      setup_user(:admin)
 
-    response.status.should == 200
-    body = ActiveSupport::JSON.decode(response.body)
-    body["content"].count.should == 2
-    body["content"][0]["code"].should == 'user_role'
-    body["content"][1]["code"].should == 'admin_role'
+      @role_1 = FactoryGirl.create(:role)
+      @role_2 = FactoryGirl.create(:admin_role)
+    end
 
-    body["meta"]["total_pages"].should == 1
-    body["meta"]["total_entries"].should == 2
-  end
+    ## INDEX ####################################################################
+    it "vidi seznam roli" do
+      get :index, format: :json
 
-  ## SHOW #####################################################################
-  it "vrati detail role" do
-    get :show, id: @role_1.id, format: :json
+      response.status.should == 200
+      body = ActiveSupport::JSON.decode(response.body)
+      # Pozn: setup_user take vytvori roli, takze jich je celkem 3
+      body["content"].count.should == 3
+      body["content"][1]["code"].should == @role_1.code
+      body["content"][2]["code"].should == @role_2.code
 
-    response.status.should == 200
-    body = ActiveSupport::JSON.decode(response.body)
-    body["content"]["id"].should == @role_1.id
-    body["content"]["code"].should == "user_role"
-  end
+      body["meta"]["total_pages"].should == 1
+      body["meta"]["total_entries"].should == 3
+    end
 
-  ## CREATE ###################################################################
-  it "vytvori roli" do
-    post :create, format: :json, role: ROLE_ATTRIBUTES
+    ## SHOW #####################################################################
+    it "vidi detail role" do
+      get :show, id: @role_1.id, format: :json
 
-    response.status.should == 200
-    body = ActiveSupport::JSON.decode(response.body)
-    body["content"]["id"].should == Role.last.id
-  end
+      response.status.should == 200
+      body = ActiveSupport::JSON.decode(response.body)
+      body["content"]["id"].should == @role_1.id
+      body["content"]["code"].should == @role_1.code
+    end
 
-  it "nevytvori roli bez nazvu" do
-    post :create, format: :json, role: ROLE_ATTRIBUTES.merge(name: "")
+    ## CREATE ###################################################################
+    it "vytvori roli" do
+      post :create, format: :json, role: ROLE_ATTRIBUTES
 
-    response.status.should == 422
-    body = ActiveSupport::JSON.decode(response.body)
-    body["errors"].count.should == 1
-    body["errors"]["name"].should include "Toto pole nemůže zůstat prázdné"
-  end
+      response.status.should == 200
+      body = ActiveSupport::JSON.decode(response.body)
+      body["content"]["id"].should == Role.last.id
+    end
 
-  ## UPDATE ###################################################################
-  it "upravi roli" do
-    put :update,
-      format: :json,
-      id: @role_1.id,
-      role: { name: "Administrator systemu" }
+    it "nevytvori roli bez nazvu" do
+      post :create, format: :json, role: ROLE_ATTRIBUTES.merge(name: "")
 
-    response.status.should == 204
-  end
+      response.status.should == 422
+      body = ActiveSupport::JSON.decode(response.body)
+      body["errors"].count.should == 1
+      body["errors"]["name"].should include "Toto pole nemůže zůstat prázdné"
+    end
 
-  it "neupravi roli bez nazvu" do
-    post :update,
-      format: :json,
-      id: @role_1.id,
-      role: { name: "" }
+    ## UPDATE ###################################################################
+    it "upravi roli" do
+      put :update,
+        format: :json,
+        id: @role_1.id,
+        role: { name: "Administrator systemu" }
 
-    response.status.should == 422
-    body = ActiveSupport::JSON.decode(response.body)
-    body["errors"].count.should == 1
-    body["errors"]["name"].should include "Toto pole nemůže zůstat prázdné"
-  end
+      response.status.should == 204
+    end
 
-  ## DESTROY ###################################################################
-  it "smaze roli" do
-    delete :destroy, format: :json, id: @role_1.id
-    response.status.should == 204
+    it "neupravi roli bez nazvu" do
+      post :update,
+        format: :json,
+        id: @role_1.id,
+        role: { name: "" }
+
+      response.status.should == 422
+      body = ActiveSupport::JSON.decode(response.body)
+      body["errors"].count.should == 1
+      body["errors"]["name"].should include "Toto pole nemůže zůstat prázdné"
+    end
+
+    ## DESTROY ###################################################################
+    it "smaze roli" do
+      delete :destroy, format: :json, id: @role_1.id
+      response.status.should == 204
+    end
+
   end
 
   ROLE_ATTRIBUTES = {
-    code: 'user',
-    name: 'Uživatel'
+    code: 'rolecode',
+    name: 'Uživatelska role'
   }
 end

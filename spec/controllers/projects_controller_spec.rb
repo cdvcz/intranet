@@ -5,7 +5,7 @@ require 'spec_helper'
 describe ProjectsController do
 
   before do
-    setup_user(:user)
+    setup_user(:admin)
     @project_1 = FactoryGirl.create(:project, name: "Výzkum okružních křižovatek")
     @project_2 = FactoryGirl.create(:project, name: "Režie úseku SW")
   end
@@ -34,7 +34,7 @@ describe ProjectsController do
 
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)
-    
+
     %w{date_from date_to}.each do |attribute|
       body["content"][attribute].should == @project_1.send(attribute.to_sym).try(:strftime, "%Y-%m-%d")
     end
