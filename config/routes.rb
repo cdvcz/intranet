@@ -1,6 +1,8 @@
 Intranet::Application.routes.draw do
   resources :demands
   resources :roles
+  resources :units
+  resources :employees
   resources :projects
   resources :subjects
   resources :employees
