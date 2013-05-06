@@ -8,6 +8,7 @@ gem 'jbuilder'
 gem 'meta_search'
 gem 'will_paginate'
 gem 'cancan'
+gem 'awesome_nested_set'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
