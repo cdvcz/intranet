@@ -9,7 +9,8 @@ class Unit < ActiveRecord::Base
   before_destroy :check_for_empty
 
   def read_attribute_for_validation(attr)
-    attr
+    return :unit if attr == :unit
+    send(attr)
   end
 
   private
