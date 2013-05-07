@@ -3,3 +3,6 @@ cs:
     errors:
       messages:
         blank: Toto pole nemůže zůstat prázdné
+      models:
+        unit:
+          not_empty: Nelze smazat neprázdnou skupinu

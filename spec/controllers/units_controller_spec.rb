@@ -126,6 +126,9 @@ describe UnitsController do
     delete :destroy, format: :json, id:@division1.id
 
     response.status.should == 422
+    body = ActiveSupport::JSON.decode(response.body)
+    body["errors"].count.should == 1
+    body["errors"]["unit"].should include "Nelze smazat neprázdnou skupinu"
   end
 
   DIVISION_ATTRIBUTES = {
