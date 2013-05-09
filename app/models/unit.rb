@@ -1,4 +1,4 @@
-class Unit < TreeModel
+class Unit < BaseTreeModel
   attr_protected :created_at, :updated_at
 
   validates :name, presence: true

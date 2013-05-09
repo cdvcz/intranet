@@ -1,4 +1,4 @@
-class TreeModel < ActiveRecord::Base
+class BaseTreeModel < ActiveRecord::Base
   self.abstract_class = true
   attr_protected :lft, :rgt
   acts_as_nested_set
