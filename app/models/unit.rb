@@ -8,6 +8,13 @@ class Unit < ActiveRecord::Base
 
   before_destroy :check_for_empty
 
+  # Helper for to_json: add children
+  #
+  # Adds children data to attribute "children"
+  def to_node
+    self.attributes.merge({:children => self.descendants.map {|c| c.to_node}})
+  end
+
   def read_attribute_for_validation(attr)
     return :unit if attr == :unit
     send(attr)
