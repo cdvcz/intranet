@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'spec_helper'
+require 'pry'
 
 describe UnitsController do
 
@@ -12,7 +13,7 @@ describe UnitsController do
   end
 
   ## INDEX ###################################################################
-  it "organizacni struktura" do
+  it "organizacni struktura - plocha struktura" do
     get :index, format: :json
 
     response.status.should == 200
@@ -20,6 +21,20 @@ describe UnitsController do
     body["content"].count.should == 5
     body["content"][0]["name"].should == "Divize 1"
     body["content"][1]["name"].should == "Divize 2"
+  end
+
+  it "organizacni struktura - jako strom" do
+    get :tree, format: :json
+
+    response.status.should == 200
+    body = ActiveSupport::JSON.decode(response.body)
+    binding.pry
+    body["content"].count.should == 2
+    body["content"][0]["name"].should == "Divize 1"
+    body["content"][0]["children"].count.should == 2
+    body["content"][0]["children"][0]["name"].should == "Oblast 11"
+    body["content"][1]["children"].count.should == 1
+    body["content"][1]["children"][0]["name"].should == "Oblast 21"
   end
 
   ## SHOW ####################################################################
