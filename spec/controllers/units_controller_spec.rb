@@ -1,6 +1,5 @@
 # encoding: utf-8
 require 'spec_helper'
-require 'pry'
 
 describe UnitsController do
 
@@ -28,7 +27,6 @@ describe UnitsController do
 
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)
-    binding.pry
     body["content"].count.should == 2
     body["content"][0]["name"].should == "Divize 1"
     body["content"][0]["children"].count.should == 2
