@@ -1,19 +1,10 @@
-class Unit < ActiveRecord::Base
-  attr_protected :created_at, :updated_at, :lft, :rgt
+class Unit < TreeModel
+  attr_protected :created_at, :updated_at
 
   validates :name, presence: true
   validates :abbreviation, presence: true
 
-  acts_as_nested_set
-
   before_destroy :check_for_empty
-
-  # Helper for to_json: add children
-  #
-  # Adds children data to attribute "children"
-  def to_node
-    self.attributes.merge({:children => self.descendants.map {|c| c.to_node}})
-  end
 
   def read_attribute_for_validation(attr)
     return :unit if attr == :unit
