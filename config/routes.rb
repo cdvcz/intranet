@@ -12,4 +12,5 @@ Intranet::Application.routes.draw do
 
   root to: 'application#start'
   match "*path", to: 'application#start'
+  get "units/tree"
 end
