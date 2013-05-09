@@ -2,11 +2,11 @@
 <div ng-controller='SessionsController'>
 {{ username }}
 <form ng-submit='createSession()'>
-  <label for='login_username'>Uživatel</label>
-  <input type="text" id='login_username' name="login_username" ng-model='session.login_username' >
+  <label for='login'>Uživatel</label>
+  <input type="text" id='login' name="login" ng-model='session.login' >
 
-  <label for='login_password'>Heslo</label>
-  <input type="password" id='login_password' name="login_password" ng-model='session.login_password' >
+  <label for='password'>Heslo</label>
+  <input type="password" id='password' name="password" ng-model='session.password' >
   <input type='submit' value='Přihlásit se'/>
 </form>
 

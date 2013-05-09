@@ -5,7 +5,7 @@
   $scope.createSession = ->
     SessionService.login $scope.session, (authorized, user) ->
       if authorized
-        $scope.result = "Byl jste přihlášen jako #{user.login_username}"
+        $scope.result = "Byl jste přihlášen jako #{user.name}"
         $location.path "/"
       else
         $scope.result = "Nesprávné uživatelské jméno nebo heslo"
@@ -17,10 +17,9 @@
   init = ->
     if SessionService.authorized()
       current_user = SessionService.currentUser()
-      $scope.username = current_user.login_username
+      $scope.username = current_user.login
     else
       $scope.username = "odhlasen"
 
   init()
 ]
-

@@ -2,9 +2,7 @@
     if SessionService.authorized()
       current_user = SessionService.currentUser()
       console.dir current_user
-      $scope.username = current_user.login_username
+      $scope.username = current_user.login
     else
       $location.path "/login"
-
 ]
-

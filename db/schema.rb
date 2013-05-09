@@ -11,22 +11,43 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130502144537) do
+ActiveRecord::Schema.define(:version => 20130507123712) do
+
+  create_table "demands", :force => true do |t|
+    t.integer  "status"
+    t.string   "number"
+    t.string   "name"
+    t.integer  "tax_year"
+    t.text     "description"
+    t.float    "price"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "employees", :force => true do |t|
-    t.string   "number"
+    t.integer  "person_id"
+    t.integer  "status"
+    t.date     "date_from"
+    t.date     "date_to"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "employees_users", :id => false, :force => true do |t|
+    t.integer "employee_id"
+    t.integer "user_id"
+  end
+
+  create_table "people", :force => true do |t|
+    t.integer  "status"
     t.string   "first_name"
-    t.string   "surname"
+    t.string   "second_name"
+    t.string   "last_name"
     t.string   "title_prefix"
     t.string   "title_suffix"
-    t.string   "job"
-    t.string   "email"
-    t.string   "phone"
-    t.string   "phone_cellular"
-    t.string   "employed_from"
-    t.string   "employed_to"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "sex"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "projects", :force => true do |t|
@@ -70,19 +91,12 @@ ActiveRecord::Schema.define(:version => 20130502144537) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "login_username"
+    t.integer  "status"
+    t.string   "name"
+    t.string   "login"
     t.string   "password_digest"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-    t.string   "login_showname"
-    t.boolean  "login_allowed"
-    t.datetime "login_last"
-    t.string   "login_password_old"
-    t.datetime "login_password_last_changed"
-    t.integer  "employee_id"
-    t.string   "login_redirect_to"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
 end
