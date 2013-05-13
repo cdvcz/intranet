@@ -1,4 +1,5 @@
 Intranet::Application.routes.draw do
+  resources :datafiles
   resources :demands
   resources :roles
   resources :units

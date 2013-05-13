@@ -13,6 +13,17 @@
 
 ActiveRecord::Schema.define(:version => 20130507123712) do
 
+  create_table "datafiles", :force => true do |t|
+    t.string   "name"
+    t.integer  "status"
+    t.text     "description"
+    t.string   "data_file_name"
+    t.integer  "data_file_size"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "data_content_type"
+  end
+
   create_table "demands", :force => true do |t|
     t.integer  "status"
     t.string   "number"
