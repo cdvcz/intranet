@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130507123712) do
+=======
+ActiveRecord::Schema.define(:version => 20130507092648) do
+>>>>>>> 9f148ad... Updated resource Datafiles
 
   create_table "datafiles", :force => true do |t|
     t.string   "name"
