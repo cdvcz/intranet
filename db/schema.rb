@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507123712) do
+ActiveRecord::Schema.define(:version => 20130509141549) do
 
   create_table "datafiles", :force => true do |t|
     t.string   "name"
@@ -47,18 +47,6 @@ ActiveRecord::Schema.define(:version => 20130507123712) do
   create_table "employees_users", :id => false, :force => true do |t|
     t.integer "employee_id"
     t.integer "user_id"
-  end
-
-  create_table "people", :force => true do |t|
-    t.integer  "status"
-    t.string   "first_name"
-    t.string   "second_name"
-    t.string   "last_name"
-    t.string   "title_prefix"
-    t.string   "title_suffix"
-    t.integer  "sex"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
   end
 
   create_table "people", :force => true do |t|
@@ -113,6 +101,17 @@ ActiveRecord::Schema.define(:version => 20130507123712) do
     t.datetime "updated_at",              :null => false
   end
 
+  create_table "units", :force => true do |t|
+    t.string   "name"
+    t.string   "abbreviation"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.integer  "status"
     t.string   "name"
@@ -123,4 +122,3 @@ ActiveRecord::Schema.define(:version => 20130507123712) do
   end
 
 end
-
