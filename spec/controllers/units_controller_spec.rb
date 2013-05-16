@@ -24,7 +24,7 @@ describe UnitsController do
   end
 
   it "organizacni struktura - jako strom" do
-    get :tree, format: :json
+    get :tree, id: @division1.id, format: :json
 
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)
@@ -131,13 +131,13 @@ describe UnitsController do
 
   ## DESTROY #################################################################
   it "smaze oblast" do
-    delete :destroy, format: :json, id:@field12.id
+    delete :destroy, format: :json, id: @field12.id
 
     response.status.should == 204
   end
 
   it "nesmaze neprazdnou divizi" do
-    delete :destroy, format: :json, id:@division1.id
+    delete :destroy, format: :json, id: @division1.id
 
     response.status.should == 422
     body = ActiveSupport::JSON.decode(response.body)

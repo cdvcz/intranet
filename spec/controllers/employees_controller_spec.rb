@@ -6,8 +6,12 @@ describe EmployeesController do
 
   before do
     setup_user(:admin)
-    @employee_1 = FactoryGirl.create(:employee, surname: "Novák")
-    @employee_2 = FactoryGirl.create(:employee, surname: "Bartoš")
+
+    @employee_1 = FactoryGirl.create(:employee)
+    @employee_1.person.update_attributes(last_name: "Novák")
+
+    @employee_2 = FactoryGirl.create(:employee)
+    @employee_2.person.update_attributes(last_name: "Bartoš")
   end
 
   ## INDEX ####################################################################
@@ -16,16 +20,13 @@ describe EmployeesController do
 
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)
+
     body["content"].count.should == 2
-    body["content"][0]["surname"].should == 'Bartoš'
-    body["content"][1]["surname"].should == 'Novák'
+    body["content"][0]["person"]["last_name"].should == 'Bartoš'
+    body["content"][1]["person"]["last_name"].should == 'Novák'
 
     body["meta"]["total_pages"].should == 1
     body["meta"]["total_entries"].should == 2
-
-    %w{id first_name surname job}.each do |attribute|
-      body["content"][1][attribute].should == @employee_1.attributes[attribute]
-    end
   end
 
   ## SHOW #####################################################################
@@ -35,15 +36,13 @@ describe EmployeesController do
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)
 
-    %w{employed_from employed_to}.each do |attribute|
-      body["content"][attribute].should == @employee_1.send(attribute.to_sym).try(:strftime, "%Y-%m-%d %H:%M:%S")
+    %w{date_from date_to}.each do |attribute|
+      body["content"][attribute].should == @employee_1.send(attribute.to_sym).try(:strftime, "%Y-%m-%d")
     end
 
-    %w{id number full_name_with_titles job email
-       phone phone_cellular}.each do |attribute|
-      body["content"][attribute].should == @employee_1.send(attribute.to_sym)
-    end
-   end
+    body["content"]["person"]["first_name"].should == @employee_1.person.first_name
+    body["content"]["person"]["last_name"].should == @employee_1.person.last_name
+  end
 
   ## CREATE ###################################################################
   it "vytvori zamestnance" do
@@ -55,12 +54,13 @@ describe EmployeesController do
   end
 
   it "nevytvori zamestnance bez prijmeni" do
-    post :create, format: :json, employee: EMPLOYEE_ATTRIBUTES.merge(surname: "")
+    post :create, format: :json,
+      employee: EMPLOYEE_ATTRIBUTES.merge(person_attributes: { last_name: "" })
 
     response.status.should == 422
     body = ActiveSupport::JSON.decode(response.body)
     body["errors"].count.should == 1
-    body["errors"]["surname"].should include "Toto pole nemůže zůstat prázdné"
+    body["errors"]["person.last_name"].should include "Toto pole nemůže zůstat prázdné"
   end
 
   ## UPDATE ###################################################################
@@ -68,7 +68,7 @@ describe EmployeesController do
     put :update,
       format: :json,
       id: @employee_1.id,
-      employee: { surname: "Lucemburský" }
+      employee: { person_attributes: { last_name: "Lucemburský" } }
 
     response.status.should == 204
   end
@@ -77,12 +77,12 @@ describe EmployeesController do
     post :update,
       format: :json,
       id: @employee_1.id,
-      employee: { surname: "" }
+      employee: { person_attributes: { last_name: "" } }
 
     response.status.should == 422
     body = ActiveSupport::JSON.decode(response.body)
     body["errors"].count.should == 1
-    body["errors"]["surname"].should include "Toto pole nemůže zůstat prázdné"
+    body["errors"]["person.last_name"].should include "Toto pole nemůže zůstat prázdné"
   end
 
   ## DESTROY ###################################################################
@@ -92,10 +92,9 @@ describe EmployeesController do
   end
 
   EMPLOYEE_ATTRIBUTES = {
-      first_name: "Jan",
-      surname: "Hus",
-      number: "123",
-      phone: "731 123 123",
-      email: "hus@cdv.cz"}
+    person_attributes: {
+    first_name: "Jan",
+    last_name: "Hus" }
+  }
 
 end

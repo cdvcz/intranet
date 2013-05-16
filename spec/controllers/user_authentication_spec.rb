@@ -5,7 +5,7 @@ describe SessionsController do
   it "Uzivatel se spravnym heslem se prihlasi" do
     User.create!(login: "test", password: "heslo")
 
-    post :create, login: 'test', password: 'heslo'
+    post :create, login: 'test', password: 'heslo', format: :json
 
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)
@@ -16,7 +16,7 @@ describe SessionsController do
   it "Uzivatel s nespravnym heslem se neprihlasi" do
     User.create!(login: "test", password: "heslo")
 
-    post :create, login: 'test', password: 'spatneheslo'
+    post :create, login: 'test', password: 'spatneheslo', format: :json
 
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)
