@@ -4,6 +4,7 @@ require 'spec_helper'
 describe UnitsController do
 
   before do
+    setup_user(:admin)
     @division1 = FactoryGirl.create(:unit, name: "Divize 1", abbreviation: "D1")
     @division2 = FactoryGirl.create(:unit, name: "Divize 2", abbreviation: "D2")
     @field11 = FactoryGirl.create(:unit, name: "Oblast 11", abbreviation: "O11", parent: @division1)
@@ -115,7 +116,7 @@ describe UnitsController do
     body["errors"].count.should == 1
     body["errors"]["name"].should include "Toto pole nemůže zůstat prázdné"
   end
-  
+
   it "neupravi divizi bez zkratky" do
     post :update,
       format: :json,
