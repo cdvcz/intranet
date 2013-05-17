@@ -40,7 +40,7 @@ describe DemandsController do
     %w{id status number name tax_year description price}.each do |attribute|
       body["content"][attribute].should == @demand_1.send(attribute.to_sym)
     end
-   end
+  end
 
   ## CREATE ###################################################################
   it "vytvori zadanku" do

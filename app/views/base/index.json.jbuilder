@@ -5,7 +5,7 @@ end
 
 json.set! :content do
   json.array!(@resources) do |json, resource|
-    json.(resource, *resource.attributes.keys.map(&:to_sym))
+    render partial: 'base/resource', locals: { json: json, resource: resource }
   end
 end
 
