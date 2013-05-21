@@ -1,7 +1,7 @@
 # encoding: utf-8
 # author: martinbachtikcdvcz
 
-require 'spec_helper'
+require('spec_helper')
 
 describe DatafilesController do
 
@@ -52,7 +52,7 @@ describe DatafilesController do
   # index #
 
   it 'vrátí seznam souborů' do
-    get :index,format: :json
+    get(:index,{format: :json})
 
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)
@@ -62,11 +62,8 @@ describe DatafilesController do
     body['meta']['total_pages'].should == 1
     body['meta']['total_entries'].should == 2
 
-    %w{id name description data_file_name data_file_size data_content_type}.each do |attribute|
+    ['id','name','description','data_file_name','data_file_size','data_content_type'].each do |attribute|
       body['content'][0][attribute].should == @datafile1.attributes[attribute]
-    end
-
-    %w{id name description data_file_name data_file_size data_content_type}.each do |attribute|
       body['content'][1][attribute].should == @datafile2.attributes[attribute]
     end
   end
@@ -74,12 +71,12 @@ describe DatafilesController do
   # show #
 
   it 'vrátí detail souboru' do
-    get :show,id: @datafile1.id,format: :json
+    get(:show,{id: @datafile1.id,format: :json})
 
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)
 
-    %w{id name description data_file_name data_file_size data_content_type}.each do |attribute|
+    ['id','name','description','data_file_name','data_file_size','data_content_type'].each do |attribute|
       body['content'][attribute].should == @datafile1.attributes[attribute]
     end
   end
@@ -87,7 +84,7 @@ describe DatafilesController do
   # create #
 
   it 'vytvoří soubor' do
-    post :create,format: :json,datafile: DATAFILE3CREATE
+    post(:create,{format: :json,datafile: DATAFILE3CREATE})
 
     response.status.should == 200
     body = ActiveSupport::JSON.decode(response.body)
@@ -96,7 +93,7 @@ describe DatafilesController do
   end
 
   it 'nevytvoří soubor bez názvu' do
-    post :create,format: :json,datafile: DATAFILE4CREATE
+    post(:create,{format: :json,datafile: DATAFILE4CREATE})
 
     response.status.should == 422
     body = ActiveSupport::JSON.decode(response.body)
@@ -108,13 +105,13 @@ describe DatafilesController do
   # update #
 
   it 'aktualizuje soubor' do
-    put :update,format: :json,id: @datafile1.id,datafile: DATAFILE1UPDATE1
+    put(:update,{format: :json,id: @datafile1.id,datafile: DATAFILE1UPDATE1})
 
     response.status.should == 204
   end
 
   it 'neaktualizuje soubor bez názvu' do
-    post :update,format: :json,id: @datafile1.id,datafile: DATAFILE1UPDATE2
+    post(:update,{format: :json,id: @datafile1.id,datafile: DATAFILE1UPDATE2})
 
     response.status.should == 422
     body = ActiveSupport::JSON.decode(response.body)
@@ -126,8 +123,8 @@ describe DatafilesController do
   # destroy #
 
   it 'odstraní soubor' do
-    delete :destroy,format: :json,id: @datafile1.id
-    
+    delete(:destroy,{format: :json,id: @datafile1.id})
+
     response.status.should == 204
   end
 
