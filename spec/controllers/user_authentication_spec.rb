@@ -16,15 +16,15 @@ describe SessionsController do
 
   it "Uzivatel s nespravnym heslem se neprihlasi" do
     User.create!(name: "Jan Hus")
-    account = double("Account")
-    account.stub(:get).and_throw(ActiveResource::UnauthorizedAccess)
 
-    post :create, login: 'test', password: 'spatneheslo', format: :json
+    VCR.use_cassette('sessions/create') do
+      post :create, login: 'test', password: 'spatneheslo', format: :json
 
-    response.status.should == 200
-    body = ActiveSupport::JSON.decode(response.body)
-    body["authorized"].should be_false
-    body["content"].should be_nil
+      response.status.should == 200
+      body = ActiveSupport::JSON.decode(response.body)
+      body["authorized"].should be_false
+      body["content"].should be_nil
+    end
   end
 
 end
