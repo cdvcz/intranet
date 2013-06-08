@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:3001/accounts/authenticate.json?application_code=intranet&login=test&password=spatneheslo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: ! 'Unauthorized '
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      cache-control:
+      - no-cache
+      x-request-id:
+      - c60f7964cba8307a1482401454a0808b
+      x-runtime:
+      - '0.155494'
+      server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2012-04-20)
+      date:
+      - Thu, 06 Jun 2013 12:31:53 GMT
+      content-length:
+      - '20'
+      connection:
+      - close
+    body:
+      encoding: US-ASCII
+      string: ! '{"authorized":false}'
+    http_version: '1.1'
+  recorded_at: Thu, 06 Jun 2013 12:31:53 GMT
+recorded_with: VCR 2.2.5
