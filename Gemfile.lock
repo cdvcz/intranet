@@ -1,3 +1,10 @@
+GIT
+  remote: git@github.com:cdvcz/cdv_session.git
+  revision: aca14112a3481b232481afb1b9a1b188a14863bf
+  specs:
+    cdv_session (0.0.1)
+      rails (~> 3.2.13)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -193,6 +200,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   cancan
   capybara
+  cdv_session!
   coffee-rails (~> 3.2.1)
   database_cleaner
   factory_girl_rails

@@ -10,6 +10,8 @@ gem 'will_paginate'
 gem 'cancan'
 gem 'awesome_nested_set'
 
+gem 'cdv_session', git: 'git@github.com:cdvcz/cdv_session.git'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'

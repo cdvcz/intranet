@@ -1,5 +1,7 @@
 Intranet::Application.routes.draw do
 
+  mount CdvSession::Engine, at: '/'
+
   scope format: true, constraints: { :format => 'json' } do
     resources :contracts
     resources :datafiles
@@ -15,8 +17,6 @@ Intranet::Application.routes.draw do
     resources :people
     resources :users, except: [:edit, :new]
   end
-
-  resources :sessions, only: [:create, :destroy]
 
   root to: 'application#start'
   match "*path", to: 'application#start'
