@@ -1,8 +1,7 @@
 Intranet::Application.routes.draw do
-  resources :contracts
-
 
   scope format: true, constraints: { :format => 'json' } do
+    resources :contracts
     resources :datafiles
     resources :demands
     resources :roles
@@ -21,4 +20,5 @@ Intranet::Application.routes.draw do
 
   root to: 'application#start'
   match "*path", to: 'application#start'
+
 end
