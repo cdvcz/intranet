@@ -111,7 +111,7 @@ describe DatafilesController do
   end
 
   it 'neaktualizuje soubor bez názvu' do
-    post(:update,{format: :json,id: @datafile1.id,datafile: DATAFILE1UPDATE2})
+    put(:update,{format: :json,id: @datafile1.id,datafile: DATAFILE1UPDATE2})
 
     response.status.should == 422
     body = ActiveSupport::JSON.decode(response.body)

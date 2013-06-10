@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130509141549) do
+ActiveRecord::Schema.define(:version => 20130610074222) do
+
+  create_table "contracts", :force => true do |t|
+    t.integer  "status"
+    t.string   "number"
+    t.text     "subject"
+    t.integer  "tax_year"
+    t.text     "description"
+    t.date     "deadline_date"
+    t.date     "end_date"
+    t.text     "archiving"
+    t.string   "role_type"
+    t.string   "price_type"
+    t.text     "invoicing_note"
+    t.text     "note"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "datafiles", :force => true do |t|
     t.string   "name"

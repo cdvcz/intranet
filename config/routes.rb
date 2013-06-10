@@ -1,4 +1,7 @@
 Intranet::Application.routes.draw do
+  resources :contracts
+
+
   scope format: true, constraints: { :format => 'json' } do
     resources :datafiles
     resources :demands
