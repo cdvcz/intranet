@@ -37,6 +37,8 @@ GEM
       multi_json (~> 1.0)
     addressable (2.3.4)
     angularjs-rails (1.0.6)
+    annotate (2.5.0)
+      rake
     arel (3.0.2)
     awesome_nested_set (2.1.6)
       activerecord (>= 3.0.0)
@@ -96,6 +98,8 @@ GEM
       activesupport (~> 3.1)
       polyamorous (~> 0.5.0)
     method_source (0.8.1)
+    migration_comments (0.2.1)
+      rails (>= 2.3.2)
     mime-types (1.23)
     multi_json (1.7.2)
     mysql2 (0.3.11)
@@ -196,6 +200,7 @@ PLATFORMS
 
 DEPENDENCIES
   angularjs-rails
+  annotate
   awesome_nested_set
   bcrypt-ruby (~> 3.0.0)
   cancan
@@ -209,6 +214,7 @@ DEPENDENCIES
   jbuilder
   launchy
   meta_search
+  migration_comments
   mysql2
   pry
   rails (= 3.2.13)

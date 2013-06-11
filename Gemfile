@@ -10,6 +10,8 @@ gem 'will_paginate'
 gem 'cancan'
 gem 'awesome_nested_set'
 
+gem 'migration_comments'
+
 gem 'cdv_session', git: 'git@github.com:cdvcz/cdv_session.git'
 
 group :assets do
@@ -26,6 +28,7 @@ end
 group :test, :development do
   gem 'pry'
   gem "rspec-rails"
+  gem 'annotate'
 end
 
 group :test do
